@@ -1,0 +1,47 @@
+syntax = "proto3";
+package proto;
+
+//na hora de gerar as classes, se tiver enums por exemplo, ele separa
+option java_multiple_files = true;
+
+//pacote onde as classes serão geradas
+option java_package = "br.com.grpc.generated";
+
+//nome da classe no wrapper
+option java_outer_classname = "UserProto";
+
+service User {
+
+  rpc register(RegisterRequest) returns (APIResponse);
+
+  rpc login(LoginRequest) returns (APIResponse);
+
+  rpc logout(Empty) returns (APIResponse);
+
+}
+
+message RegisterRequest {
+  
+  string cpf = 1;
+  string email = 2;
+  string username = 3;  
+  string password = 4;
+}
+
+message LoginRequest {
+
+  string username = 1;
+  string password = 2;
+}
+
+message APIResponse {
+
+  string responseMessage = 1;
+  int32 responseCode = 2 ;
+}
+
+message Empty{
+
+}
+
+
